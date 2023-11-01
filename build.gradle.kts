@@ -19,6 +19,7 @@ dependencies {
     // jsoup HTML parser library @ https://jsoup.org/
     implementation("org.jsoup:jsoup:1.16.2")
     implementation("org.htmlunit:htmlunit:3.6.0")
+    implementation("org.xerial:sqlite-jdbc:3.25.2")
 }
 
 tasks.test {

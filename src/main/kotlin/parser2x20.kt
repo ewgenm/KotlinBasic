@@ -1,4 +1,5 @@
 import org.jsoup.Jsoup
+import java.sql.DriverManager
 
 fun main() {
 //следующая строка для пролучения страницы для парсинга 4х20
@@ -8,8 +9,18 @@ fun main() {
 //val result4x20 = Jsoup.parse(f)
 // Получаем все блокие "elem"
     val elem = result4x20.select("div.elem")
-    //проходим по всем блокам "елем"
-    for (e in elem) {
+    val connection = DriverManager.getConnection("jdbc:sqlite:stoloto.db")
+    val statement = connection.prepareStatement("SELECT * FROM lottery")
+    val resSet = statement.executeQuery()
+
+    while (resSet.next()){
+        print(resSet.getInt(1))
+        print("  ")
+        println(resSet.getInt(2))
+
+    }
+    //проходим по всем блокам "элем"
+    /*for (e in elem) {
         val date = e.select("div.draw_date").text() // находим дату
         val tiraj = e.select("div.draw").text() // находим номер тиража
         val nums = e.select("span.zone") // находим span с классом zone,
@@ -21,5 +32,5 @@ fun main() {
             }
         }
         println("Тираж : $tiraj от $date числа")
-    }
+    }*/
 }
